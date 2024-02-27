@@ -1,0 +1,11 @@
+{
+  "extends": "./tsconfig",
+  "include": ["src/**/*"],
+  "compilerOptions": {
+    "declaration": true,
+    "declarationDir": "dist",
+    "outDir": "dist",
+    "rootDir": "./src"
+  },
+  "exclude": ["src/**/__demos__/*", "src/**/__tests__/*",  "src/docs/"]
+}
