@@ -1,6 +1,5 @@
 import React, { Key, ReactElement, Ref, RefAttributes } from 'react'
 import { Select, SelectProps, RefSelectProps } from 'antd'
-import { CaretDownOutlined } from '@ant-design/icons'
 import forwardRefWithStatics from '../../../helpers/forwardRefWithStatics'
 import FilterField, { FilterFieldProps } from './Field'
 import { useFieldProps } from '../hooks/useFieldProps'
@@ -24,9 +23,8 @@ const FilterSelect = (forwardRefWithStatics<FilterSelectProps, RefSelectProps>((
       <Select
         ref={ref}
         placeholder="请选择"
-        suffixIcon={<CaretDownOutlined />}
         {...restProps}
-        className={cx('hh-filter-select', restProps.className)}
+        className={cx('d-pro-filter-select', restProps.className)}
       />
     </FilterField>
   )
@@ -36,7 +34,7 @@ const FilterSelect = (forwardRefWithStatics<FilterSelectProps, RefSelectProps>((
 }) as FilterSelectFn)
 
 if (process.env.NODE_ENV !== 'production') {
-  FilterSelect.displayName = 'HhFilterSelect'
+  FilterSelect.displayName = 'DProFilterSelect'
 }
 
 export default FilterSelect

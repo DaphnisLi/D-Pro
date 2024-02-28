@@ -7,11 +7,6 @@ interface Props<TFilter extends object = any> {
   onFilterChange: Dispatch<SetStateAction<TFilter>>
   onFilterReset: () => void
   onRequest: () => void
-  addSnapshotItem: (item: TFilter, title: string) => void
-  checkSnapshotItem: (title: string) => {
-    isPass: boolean
-    message: string
-  }
   defaultFilter?: TFilter
 }
 
@@ -22,8 +17,6 @@ const useFilterProps = <TFilter extends object = any>(props: Props<TFilter>): Fi
     onFilterChange,
     onFilterReset,
     onRequest,
-    addSnapshotItem,
-    checkSnapshotItem,
     defaultFilter,
   } = props
 
@@ -36,8 +29,6 @@ const useFilterProps = <TFilter extends object = any>(props: Props<TFilter>): Fi
       onFilterChange(() => filter)
     }, [onFilterChange]),
     onRequest,
-    addSnapshotItem,
-    checkSnapshotItem,
   }
 }
 

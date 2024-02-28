@@ -166,7 +166,7 @@ export const Sortable = forwardRef<HTMLDivElement, SortableProps>((props, ref) =
 })
 
 if (process.env.NODE_ENV !== 'production') {
-  Sortable.displayName = 'HhSortable'
+  Sortable.displayName = 'DProSortable'
 }
 
 export type {

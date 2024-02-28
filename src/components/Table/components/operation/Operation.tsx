@@ -60,10 +60,10 @@ const TableOperations = forwardRefWithStatics<TableOperationsProps, HTMLDivEleme
         key: operationKey,
         className: cx(
           styles.item,
-          'hh-table-operations-item',
+          'd-pro-table-operations-item',
           {
-            'hh-table-operations-item-link': !!href,
-            'hh-table-operations-item-disabled': disabled,
+            'd-pro-table-operations-item-link': !!href,
+            'd-pro-table-operations-item-disabled': disabled,
           },
           className,
         ),
@@ -111,7 +111,7 @@ const TableOperations = forwardRefWithStatics<TableOperationsProps, HTMLDivEleme
   }, [children, cx, styles.item])
 
   return (
-    <Space ref={ref} className={cx('hh-table-operations', className)} style={style}>
+    <Space ref={ref} className={cx('d-pro-table-operations', className)} style={style}>
       {externals}
       {internals.length > 0 && (
         <Dropdown
@@ -131,7 +131,7 @@ const TableOperations = forwardRefWithStatics<TableOperationsProps, HTMLDivEleme
 })
 
 if (process.env.NODE_ENV !== 'production') {
-  TableOperations.displayName = 'HhTableOperations'
+  TableOperations.displayName = 'DProTableOperations'
 }
 
 export default TableOperations

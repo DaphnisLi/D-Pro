@@ -16,14 +16,14 @@ const FilterInput = forwardRef<InputRef, FilterInputProps>((props, ref) => {
         ref={ref}
         placeholder="请输入"
         {...restProps}
-        className={cx('hh-filter-input', restProps.className)}
+        className={cx('d-pro-filter-input', restProps.className)}
       />
     </FilterField>
   )
 })
 
 if (process.env.NODE_ENV !== 'production') {
-  FilterInput.displayName = 'HhFilterInput'
+  FilterInput.displayName = 'DProFilterInput'
 }
 
 export default FilterInput

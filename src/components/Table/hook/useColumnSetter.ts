@@ -49,7 +49,7 @@ const useColumnSetter = <RecordType extends object = any>(
   columns: ColumnsType<RecordType>[],
   columnSetterProps?: ColumnSetterProps<RecordType>,
 ): ColumnSetterCommonProps<RecordType> => {
-  const { getValue, setValue } = useStorage<{ key: Key, allowHidden: boolean }[]>(`hh-table-column-id:${tableId}`)
+  const { getValue, setValue } = useStorage<{ key: Key, allowHidden: boolean }[]>(`d-pro-table-column-id:${tableId}`)
   const [renderFlag, setRenderFlag] = useState(true)
 
   const props = useMemo(() => {

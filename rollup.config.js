@@ -5,12 +5,13 @@ import typescript from '@rollup/plugin-typescript'
 import postcss from 'rollup-plugin-postcss'
 
 const commonBundleConfigs = {
-  name: 'hh-component',
+  name: 'D-pro',
   format: 'umd',
   sourcemap: true,
   globals: {
     react: 'React',
     'react-dom': 'ReactDOM',
+    antd: 'antd',
   },
 }
 
@@ -47,5 +48,6 @@ export default {
   external: [
     'react',
     'react-dom',
+    'antd',
   ],
 }

@@ -9,22 +9,18 @@ import FilterInput, { FilterInputProps } from './components/Input'
 import FilterSelect, { FilterSelectProps } from './components/Select'
 import FilterDatePicker, { FilterDatePickerProps } from './components/DatePicker'
 import FilterRangePicker, { FilterRangePickerProps } from './components/RangePicker'
-import { cx } from '../../styles/instance'
-import useFieldSetter from './hooks/useFieldSetter'
+import { createStyles } from '../../styles/instance'
 import FilterContent from './components/FilterContent'
 import useControlledState from '../../helpers/useControlledState'
 import { FilterContext } from './hooks/useFilterValue'
 
-type FieldSetterProps = {
-  hideButton?: boolean
-
-  defaultVisible?: boolean
-  visible?: boolean
-  onVisibleChange?: (visible: boolean) => void
-
-  visibleFields?: ReactNode
-  onVisibleFieldsChange?: (visibleFields: ReactNode) => void
-}
+const useStyles = createStyles(({ css }) => {
+  return {
+    filter: css`
+      margin-bottom: 32px;
+    `,
+  }
+})
 
 interface FilterProps<TFilter extends object = any> extends StyledProps, Pick<FormItemProps, 'wrapperCol' | 'labelCol' | 'colon' | 'labelAlign'> {
   id: Key
@@ -42,17 +38,6 @@ interface FilterProps<TFilter extends object = any> extends StyledProps, Pick<Fo
   onRequest?: () => void
 
   children?: ReactNode
-
-  visibleSnapshot?: boolean
-  addSnapshotItem?: (item: TFilter, title: string) => void
-  checkSnapshotItem?: (title: string) => {
-    isPass: boolean
-    message: string
-  }
-
-  fieldSetter?: FieldSetterProps
-
-  inquireRender?: (props: { search: () => void }) => ReactNode
 }
 
 type FilterFn = ForwardRefFC<{
@@ -76,26 +61,22 @@ export const Filter = forwardRefWithStatics(<T extends object = {}>(
     onChange,
     className,
     style,
-    fieldSetter,
-    children,
     onReset,
     ...restProps
   } = props
 
+  const { styles, cx } = useStyles()
+
   const [filterValue, setFilterValue] = useControlledState(value, defaultValue, onChange)
 
-  // 值变化回调
   const onFilterValueChange = useCallback((value: Partial<T>) => {
     setFilterValue(({ ...filterValue, ...value } as T))
   }, [filterValue, setFilterValue])
 
-  // 默认重置 filter 回调
   const onResetFilterValue = useCallback(() => {
     setFilterValue(defaultValue!)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
-
-  const fieldSetterCommonProps = useFieldSetter(id, children as ReactElement[], fieldSetter)
 
   return (
     <FilterContext.Provider
@@ -106,7 +87,7 @@ export const Filter = forwardRefWithStatics(<T extends object = {}>(
     >
       <Row
         ref={ref}
-        className={cx('hh-component-filter', className)}
+        className={cx(styles.filter, 'd-pro-filter', className)}
         style={style}
         gutter={[24, 12]}
       >
@@ -114,7 +95,6 @@ export const Filter = forwardRefWithStatics(<T extends object = {}>(
           filterValue={filterValue}
           onResetFilterValue={onResetFilterValue}
           {...restProps}
-          {...fieldSetterCommonProps}
         />
       </Row>
     </FilterContext.Provider>
@@ -128,12 +108,11 @@ export const Filter = forwardRefWithStatics(<T extends object = {}>(
 }) as FilterFn
 
 if (process.env.NODE_ENV !== 'production') {
-  Filter.displayName = 'HhFilter'
+  Filter.displayName = 'DProFilter'
 }
 
 export type {
   FilterProps,
-  FieldSetterProps,
   FieldChildProps,
   FilterFieldProps,
   FilterInputProps,

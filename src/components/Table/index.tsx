@@ -104,7 +104,7 @@ export const Table = forwardRefWithStatics(<RecordType extends object = any>(pro
   const columnSetterCommonProps = useColumnSetter<RecordType>(id, columns, columnSetter)
 
   const operationBar = useMemo(() => (
-    <div className={cx(styles.operation, 'hh-table-operation-bar')}>
+    <div className={cx(styles.operation, 'd-pro-table-operation-bar')}>
       <Flex gap={12} justify="flex-end">
         {renderOperationBar?.()}
         <ColumnSetterBtn
@@ -116,7 +116,7 @@ export const Table = forwardRefWithStatics(<RecordType extends object = any>(pro
   ), [renderOperationBar, columnSetterCommonProps.hideButton, columnSetterCommonProps.setVisible, cx, styles])
 
   return (
-    <div className={cx('hh-table', className)} style={style}>
+    <div className={cx('d-pro-table', className)} style={style}>
       {operationBar}
 
       <AntdTable
@@ -140,7 +140,7 @@ export const Table = forwardRefWithStatics(<RecordType extends object = any>(pro
 ) as unknown as TableFn
 
 if (process.env.NODE_ENV !== 'production') {
-  Table.displayName = 'HhTable'
+  Table.displayName = 'DProTable'
 }
 
 export type {

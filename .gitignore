@@ -1,22 +1,12 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
-
-# dependencies
-/node_modules
-/npm-debug.log*
-/yarn-error.log
-/package-lock.json
-
-# production
-/dist
-/docs
-/.docz
-
-# misc
-.DS_Store
-
-# umi
+**/node_modules/
+lerna-debug.log
+**/dist/
+docs-dist/
 .umi
 .umi-production
 .umi-test
 .env.local
 .mfsu-production
+tmp
+tmp-production
+.dumi

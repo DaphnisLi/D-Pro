@@ -36,7 +36,7 @@ const RangePicker = forwardRef<Component<AntdRangePickerProps> & CommonPickerMet
       ref={ref}
       placeholder={['开始', '结束']}
       {...restProps}
-      className={cx(styles.rangePicker, 'hh-filter-range-picker', restProps.className)}
+      className={cx(styles.rangePicker, 'd-pro-filter-range-picker', restProps.className)}
     />
   )
 })
@@ -52,7 +52,7 @@ const FilterRangePicker = forwardRef<Component<RangePickerProps> & CommonPickerM
 })
 
 if (process.env.NODE_ENV !== 'production') {
-  FilterRangePicker.displayName = 'HhFilterRangePicker'
+  FilterRangePicker.displayName = 'DProFilterRangePicker'
 }
 
 export default FilterRangePicker

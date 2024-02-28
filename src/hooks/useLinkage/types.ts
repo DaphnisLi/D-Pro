@@ -70,7 +70,4 @@ export interface UseLinkageProps<
   fetch?: TableFetcher<TList, TFilter, TParams>
   // 请求防抖时间, 默认 200ms
   debounceTime?: number
-
-  // 保存模版的最大缓存量
-  snapshotQuota?: number
 }

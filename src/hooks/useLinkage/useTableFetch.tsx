@@ -11,7 +11,7 @@ const debugInfo = (scope: string) => {
       return
     }
 
-    console.error(`[hh-component/${scope}] ${message}`, extraLink ?? '')
+    console.error(`[d-pro/${scope}] ${message}`, extraLink ?? '')
   }
 }
 

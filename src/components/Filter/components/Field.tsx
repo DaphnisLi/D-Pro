@@ -32,7 +32,7 @@ interface FilterItemCommonProps extends Pick<FormItemProps, 'tooltip' | 'wrapper
   tip?: ReactNode
 }
 
-interface FilterFieldProps<V> extends Omit<FilterItemCommonProps, 'fieldClassName' | 'fieldStyle'>, StyledProps {
+interface FilterFieldProps<V = any> extends Omit<FilterItemCommonProps, 'fieldClassName' | 'fieldStyle'>, StyledProps {
   // 原始组件，设置为 true 不代理
   pureChildren?: boolean
 
@@ -56,7 +56,6 @@ const FilterField = (<V extends any>(props: FilterFieldProps<V>) => {
   const { value, onChange } = useFilterValue(field)
 
   const onValueChange = useCallback(async (e: any) => {
-    // 兼容事件
     const value = (e && e.target) ? e.target.value : e
 
     if (!value) {
@@ -64,7 +63,6 @@ const FilterField = (<V extends any>(props: FilterFieldProps<V>) => {
       return
     }
 
-    // 如果是空数组, 清空
     if (Array.isArray(value) && value.filter(Boolean).length === 0) {
       onChange(undefined)
       return
@@ -73,18 +71,15 @@ const FilterField = (<V extends any>(props: FilterFieldProps<V>) => {
     onChange(value)
   }, [onChange])
 
-  // 代理子元素
   const realChildren = useMemo(() => {
     if (pureChildren || !children) {
       return children
     }
 
-    // 直接传函数
     if (typeof children === 'function') {
       return children({ value, onChange: onValueChange })
     }
 
-    // 只能有一个子元素
     Children.only(children)
 
     return cloneElement(children, { value, onChange: onValueChange })
@@ -95,12 +90,12 @@ const FilterField = (<V extends any>(props: FilterFieldProps<V>) => {
   }
 
   return (
-    <Col {...colSpan} style={style} className={cx('hh-filter-item-wrap', className)}>
+    <Col {...colSpan} style={style} className={cx('d-pro-filter-item-wrap', className)}>
       <Form.Item
         {...restProps}
-        className={cx(styles.formItem, 'hh-filter-item')}
+        className={cx(styles.formItem, 'd-pro-filter-item')}
       >
-        {children}
+        {realChildren}
       </Form.Item>
     </Col>
   )

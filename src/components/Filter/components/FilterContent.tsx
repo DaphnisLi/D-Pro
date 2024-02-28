@@ -1,17 +1,11 @@
 import React, { Children, isValidElement, useCallback, useMemo, useRef, cloneElement, useState } from 'react'
 import { FilterProps } from '..'
-import { Button, Space, Dropdown, Col, Flex, Grid } from 'antd'
-import type { ItemType } from 'antd/es/menu/hooks/useItems'
-import { CaretUpOutlined, CaretDownOutlined, EllipsisOutlined } from '@ant-design/icons'
+import { Button, Space, Col, Flex, Grid } from 'antd'
+import { CaretUpOutlined, CaretDownOutlined } from '@ant-design/icons'
 import { createStyles } from '../../../styles/instance'
 import { noop } from '../../../helpers/lib'
-import { get, findKey, isEmpty } from 'lodash-es'
-import FieldSetterBtn from './fieldSetter/FieldSetterBtn'
-import FieldSetterModal from './fieldSetter/FieldSetterModal'
-import { FieldSetterCommonProps } from '../hooks/useFieldSetter'
+import { get, findKey } from 'lodash-es'
 import colSpan from '../../../helpers/layout'
-import SaveSnapshotBtn from '../../FilterSnapshot/SaveSnapshotBtn'
-import { useFilterValue } from '../hooks/useFilterValue'
 
 const { useBreakpoint } = Grid
 
@@ -29,7 +23,7 @@ const useStyles = createStyles(({ css }) => {
   }
 }, { hashPriority: 'high' })
 
-interface Props<T> extends FieldSetterCommonProps, Pick<FilterProps, 'maxShow' | 'onFilterExpandChange' | 'showReset' | 'labelCol' | 'wrapperCol' | 'colon' | 'labelAlign' | 'addSnapshotItem' | 'checkSnapshotItem' | 'inquireRender' | 'visibleSnapshot'> {
+interface Props<T> extends Pick<FilterProps, 'maxShow' | 'onFilterExpandChange' | 'showReset' | 'labelCol' | 'wrapperCol' | 'colon' | 'labelAlign' | 'onReset' | 'children'> {
   filterValue?: T
   onFilterValueChange?: (value: Partial<T>) => void
   onResetFilterValue?: () => void
@@ -50,13 +44,8 @@ const FilterContent = <T extends object = any>(props: Props<T>) => {
     showReset = true,
 
     onFilterExpandChange = noop,
-    filterValue,
     onResetFilterValue,
     onRequest,
-
-    visibleSnapshot = true,
-    addSnapshotItem,
-    checkSnapshotItem,
 
     colon = false,
     labelAlign = 'right',
@@ -64,15 +53,8 @@ const FilterContent = <T extends object = any>(props: Props<T>) => {
     maxShow,
     labelCol,
     wrapperCol,
-
-    hideButton,
-
-    visible,
-    setVisible,
-
-    visibleFields,
-    setVisibleFields,
-    inquireRender,
+    onReset,
+    children,
   } = props
 
   const { styles, cx } = useStyles()
@@ -80,7 +62,6 @@ const FilterContent = <T extends object = any>(props: Props<T>) => {
   const screens = useBreakpoint()
 
   const enableExpandSwitcher = useRef(false)
-  const { value } = useFilterValue()
   const [filterExpand, setFilterExpand] = useState(false)
 
   const handleSearch = useCallback(() => {
@@ -88,13 +69,13 @@ const FilterContent = <T extends object = any>(props: Props<T>) => {
   }, [onRequest])
 
   const handleReset = useCallback(() => {
-    onResetFilterValue?.()
+    if (typeof onReset === 'function') {
+      onReset()
+    } else {
+      onResetFilterValue?.()
+    }
     handleSearch()
-  }, [onResetFilterValue, handleSearch])
-
-  const handleSaveSnapshot = useCallback((title: string) => {
-    addSnapshotItem?.(filterValue!, title)
-  }, [filterValue, addSnapshotItem])
+  }, [onReset, handleSearch, onResetFilterValue])
 
   const $children = useMemo(() => {
     let showCount = 0
@@ -102,7 +83,7 @@ const FilterContent = <T extends object = any>(props: Props<T>) => {
 
     let total = 0
 
-    const $children = Children.map(visibleFields ?? [], (child) => {
+    const $children = Children.map(children ?? [], (child) => {
       if (!isValidElement(child) || !child.type || !child.props) {
         return null
       }
@@ -126,25 +107,7 @@ const FilterContent = <T extends object = any>(props: Props<T>) => {
     }
 
     return $children
-  }, [screens, visibleFields, filterExpand, labelCol, wrapperCol, colon, labelAlign, maxShow])
-
-  const dropdownOption = useCallback(() => {
-    const items: ItemType[] = [
-      {
-        key: 2,
-        label: <FieldSetterBtn hideButton={hideButton} setVisible={setVisible} />
-      }
-    ]
-
-    if (visibleSnapshot) {
-      items.unshift({
-        key: 1,
-        label: <SaveSnapshotBtn save={handleSaveSnapshot} checkSnapshotItem={checkSnapshotItem} disabled={isEmpty(value)} />,
-        disabled: isEmpty(value)
-      })
-    }
-    return items
-  }, [checkSnapshotItem, handleSaveSnapshot, hideButton, setVisible, value, visibleSnapshot])
+  }, [maxShow, children, screens, filterExpand, labelCol, wrapperCol, colon, labelAlign])
 
   return (
     <>
@@ -156,7 +119,7 @@ const FilterContent = <T extends object = any>(props: Props<T>) => {
             {
               enableExpandSwitcher.current && (
                 <a
-                  className={cx(styles.expand, 'hh-filter-footer-expand')}
+                  className={cx(styles.expand, 'd-pro-filter-footer-expand')}
                   onClick={() => {
                     onFilterExpandChange && onFilterExpandChange(!filterExpand)
                     setFilterExpand(!filterExpand)
@@ -170,26 +133,14 @@ const FilterContent = <T extends object = any>(props: Props<T>) => {
               )
             }
 
-            {inquireRender ? inquireRender({ search: handleSearch }) : <Button className="hh-filter-footer-inquire" type="primary" onClick={handleSearch}>查询</Button>}
+            <Button className="d-pro-filter-footer-inquire" type="primary" onClick={handleSearch}>查询</Button>
 
             {showReset && (
-              <Button className="hh-filter-footer-reset" onClick={handleReset}>清空</Button>
+              <Button className="d-pro-filter-footer-reset" onClick={handleReset}>清空</Button>
             )}
-            <Dropdown menu={{ items: dropdownOption() }}
-            >
-              <Button className={cx(styles.ellipsis, 'hh-filter-footer-ellipsis')}><EllipsisOutlined /></Button>
-            </Dropdown>
           </Space>
         </Flex>
       </Col>
-
-      <FieldSetterModal
-        hideButton={hideButton}
-        visible={visible}
-        setVisible={setVisible}
-        visibleFields={visibleFields}
-        setVisibleFields={setVisibleFields}
-      />
     </>
   )
 }

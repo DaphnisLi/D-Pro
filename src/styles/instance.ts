@@ -13,14 +13,13 @@ interface DefaultToken {
 const styleInstance = createInstance<DefaultToken>({
   // **** 样式生成相关 **** //
 
-  key: 'hh', // 类前缀, hh-**
+  key: 'd-pro', // 类前缀, d-pro-**
   hashPriority: 'low', // 降低权重
 
   // ***** 主题相关 ***** //
   // 配置默认传给 ThemeProvider 的 props，而该 Provider 同样可以被外部覆盖 props
   // 配置后的值也会成为相关方法消费的默认值，这样一来不需要包裹 ThemeProvider 即可消费到默认值
 
-  prefixCls: 'antd5', // antd 前缀
   customToken: {
     primaryColor: '#1D43FE',
     secondaryColor: '#575B66',

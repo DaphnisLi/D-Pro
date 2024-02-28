@@ -14,9 +14,9 @@
     "strict": true,
     "skipLibCheck": true,
     "allowSyntheticDefaultImports": true,
-    "baseUrl": "../",
+    "baseUrl": "./src",
     "paths": {
-      "@didi/hh-hook": ["hh-hook/src"],
-    }
+      "@daphnis/d-pro": ["."],
+    },
   },
 }

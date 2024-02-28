@@ -32,7 +32,7 @@ const ResizableHeaderCell = (props: ResizableHeaderCellProps) => {
 
   const { styles, cx } = useStyles()
 
-  const className = useMemo(() => cx(propsClassName, resizable && 'hh-table-cell-resizable'), [resizable, propsClassName, cx])
+  const className = useMemo(() => cx(propsClassName, resizable && 'd-pro-table-cell-resizable'), [resizable, propsClassName, cx])
 
   if (!resizable) {
     return <th className={className} {...restProps} />
@@ -47,7 +47,7 @@ const ResizableHeaderCell = (props: ResizableHeaderCellProps) => {
       draggableOpts={{ enableUserSelectHack: false }}
       handle={
         <span
-          className={cx(styles.resizableHandle, 'hh-table-cell-resizable-handle')}
+          className={cx(styles.resizableHandle, 'd-pro-table-cell-resizable-handle')}
           onClick={(e) => {
             e.stopPropagation()
           }}

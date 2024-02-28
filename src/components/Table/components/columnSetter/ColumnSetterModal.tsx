@@ -58,7 +58,7 @@ const ColumnSetterModal = <RecordType extends object = any>(props: ColumnSetterM
 
   return (
     <Modal
-      className={cx(styles.modalFooter, 'hh-setter-modal')}
+      className={cx(styles.modalFooter, 'd-pro-setter-modal')}
       width={912}
       open={visible}
       title="列设置"
@@ -83,8 +83,8 @@ const ColumnSetterModal = <RecordType extends object = any>(props: ColumnSetterM
         </Flex>
       )}
     >
-      <span className={cx(styles.modalBanner, 'hh-setter-banner')}>按住选项拖动可以调整表头顺序, 勾选/取消勾选可以设置表头字段展示/隐藏</span>
-      <div className="hh-options-column-inner">
+      <span className={cx(styles.modalBanner, 'd-pro-setter-banner')}>按住选项拖动可以调整字段顺序, 勾选/取消勾选可以设置字段展示/隐藏</span>
+      <div className="d-pro-options-column-inner">
         <Sortable
           checkbox
           items={items}

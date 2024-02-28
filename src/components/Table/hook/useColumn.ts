@@ -19,7 +19,7 @@ interface Props<RecordType> {
   onColumnSizeChange?: ColumnWidthChangeHandler
 }
 
-export const OPERATION_COLUMN_KEY = 'hhTableOperation'
+export const OPERATION_COLUMN_KEY = 'DProTableOperation'
 
 const useColumn = <RecordType>(props: Props<RecordType>) => {
   const { columns, rowOperation, onColumnSizeChange } = props

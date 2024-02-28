@@ -30,7 +30,7 @@ const DatePicker = forwardRef<Component<DatePickerProps> & CommonPickerMethods, 
       ref={ref}
       placeholder="请选择时间"
       {...restProps}
-      className={cx(styles.datePicker, 'hh-filter-date-picker', restProps.className)}
+      className={cx(styles.datePicker, 'd-pro-filter-date-picker', restProps.className)}
     />
   )
 })
@@ -46,7 +46,7 @@ const FilterDatePicker = forwardRef<Component<DatePickerProps> & CommonPickerMet
 })
 
 if (process.env.NODE_ENV !== 'production') {
-  FilterDatePicker.displayName = 'HhFilterDatePicker'
+  FilterDatePicker.displayName = 'DProFilterDatePicker'
 }
 
 export default FilterDatePicker
