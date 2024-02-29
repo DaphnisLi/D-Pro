@@ -10,3 +10,4 @@ docs-dist/
 tmp
 tmp-production
 .dumi
+yarn-error.log
