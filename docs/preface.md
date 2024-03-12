@@ -49,7 +49,7 @@ D-Pro 基于 Ant Design 5, 提供一系列高效、可定制的组件, 致力于
 - 构建 Rollup
 
 ## css or css in js ?
-css in js 库有很多种, 比较著名的就是 emotion, 但通过 [Sam 的文章](https://dev.to/srmagura/why-were-breaking-up-wiht-css-in-js-4g9b) 可知这类库的优缺点都很明显
+css in js 库有很多种, 比较著名的就是 emotion, 但通过 [Sam Magura 的文章](https://dev.to/srmagura/why-were-breaking-up-wiht-css-in-js-4g9b) 可知这类库的优缺点都很明显
 
 __优点__
 - css 模块化 (重要功能)
