@@ -6,16 +6,12 @@ nav:
 title: 介绍
 ---
 
-# D-Pro
-
-D-Pro 基于 Ant Design 5, 提供一系列高效、可定制的组件, 致力于优雅地应对中台系统中频繁出现的典型场景, 全面提升研发效率！
-
-优势
-- 开发简单、高效
-- 基于 Antd 5, 可以根据 token 便捷的自定义主题
-- 基于 css in js 方案, 无需引入 css 文件
-- 全面拥抱 TypeScript、React Hook
-- 按需加载
+## 主要技术栈
+- React
+- Antd5
+- 样式: antd-style, [css or css in js ?](/preface#css-or-css-in-js-)
+- Monorepo: pnpm(安装依赖、workspace、速度快、无幽灵依赖) + lerna(发布、lerna run)
+- 构建 Rollup
 
 ## 我的思考
 中后台主要面向企业内部人员, 通常 __页面重复率高、业务复杂度高、开发复杂度高__, 因此用户需要学习, 我们也可以对用户提一些要求, 基于这个前提可以做到 __开发体验和用户体验的双赢__, 所以我们一般都会关注以下几点:
@@ -40,13 +36,6 @@ D-Pro 基于 Ant Design 5, 提供一系列高效、可定制的组件, 致力于
   - 综上: __提效 70%~90%__, 页面越简单提升越大
 - 方便定制化
   - 依靠 antd5 token
-
-## 主要技术栈
-- React
-- Antd5
-- 样式: antd-style, [css or css in js ?](/preface#css-or-css-in-js-)
-- Monorepo: pnpm(安装依赖、workspace、速度快、无幽灵依赖) + lerna(发布、lerna run)
-- 构建 Rollup
 
 ## css or css in js ?
 css in js 库有很多种, 比较著名的就是 emotion, 但通过 [Sam Magura 的文章](https://dev.to/srmagura/why-were-breaking-up-wiht-css-in-js-4g9b) 可知这类库的优缺点都很明显
